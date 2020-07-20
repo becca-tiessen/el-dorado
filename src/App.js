@@ -1,6 +1,8 @@
 import React from 'react';
-import {Grommet} from 'grommet';
-import Home from './pages/Home/Home';
+import { Grommet } from 'grommet';
+import { Switch, Route } from "react-router-dom";
+import Home from './pages/Home';
+import GarageMap from './pages/GarageMap';
 
 const theme = {
   global: {
@@ -22,7 +24,10 @@ const theme = {
 function App() {
   return (
     <Grommet theme={theme} full>
-      <Home/>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/map" component={GarageMap} />
+      </Switch>
     </Grommet>
   );
 }
