@@ -3,6 +3,7 @@ import { Grommet } from 'grommet';
 import { Switch, Route } from "react-router-dom";
 import Home from './pages/Home';
 import GarageMap from './pages/GarageMap';
+import GarageProfile from './pages/GarageProfile';
 
 const theme = {
   global: {
@@ -27,6 +28,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/map" component={GarageMap} />
+        <Route path="/garageProfile" component={GarageProfile} />
       </Switch>
     </Grommet>
   );

@@ -15,6 +15,7 @@ const Home = () => {
                         your map to the next great treasure.
                     </Paragraph>
                     <Button color='accent1' label="let's go!" onClick={()=>{history.push('/map')}}/>
+                    <Button color='accent1' label="your profile" onClick={()=>{history.push('/garageProfile')}}/>
                 </Box>
             </Box>
         </>
