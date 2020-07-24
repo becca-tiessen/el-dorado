@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, Header, Heading} from 'grommet';
+import { Box} from 'grommet';
+import NavigationBar from "../pages/NavigationBar"
 
 const GarageProfile = () => {
   return (
     <>
-    <Header background="accent4" pad="medium"></Header>
+    <NavigationBar/>
     <Box fill background='brand' >
     </Box>
 </>

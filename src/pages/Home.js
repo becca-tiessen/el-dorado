@@ -1,13 +1,14 @@
 import React from 'react';
 import { Box, Button, Header, Heading, Paragraph} from 'grommet';
 import { useHistory } from "react-router-dom";
-
+import NavigationBar from "../pages/NavigationBar"
 
 const Home = () => {
     let history = useHistory();
     return (
         <>
-            <Header background="accent4" pad="medium"></Header>
+            {/* <Header height="7%" background="accent4" pad="medium"></Header> */}
+            <NavigationBar/>
             <Box fill background='brand' >
                 <Box align="center" pad="large">
                     <Heading color='accent2' size='xlarge'>el dorado</Heading>
