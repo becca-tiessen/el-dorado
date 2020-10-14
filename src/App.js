@@ -1,9 +1,10 @@
 import React from 'react';
 import { Grommet } from 'grommet';
-import { Switch, Route } from "react-router-dom";
-import Home from './pages/Home';
-import GarageMap from './pages/GarageMap';
-import GarageProfile from './pages/GarageProfile';
+import { Switch, Route, Redirect } from "react-router-dom";
+import LandingPage from './pages/LandingPage';
+import MapContainer from './pages/MapContainer';
+import MerchantProfile from './pages/MerchantProfile';
+import ROUTES from './constants/routes';
 
 const theme = {
   global: {
@@ -26,9 +27,10 @@ function App() {
   return (
     <Grommet theme={theme} full>
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/map" component={GarageMap} />
-        <Route path="/garageProfile" component={GarageProfile} />
+        <Route path="/" exact component={LandingPage} />
+        <Route path={ROUTES.LISTINGS} component={MapContainer} />
+        <Route path={ROUTES.ACCOUNT} component={MerchantProfile} />
+        <Redirect to={LandingPage}/>
       </Switch>
     </Grommet>
   );
