@@ -1,5 +1,5 @@
 import React from 'react';
-import { InfoWindow, Marker } from 'google-maps-react';
+import { Marker } from 'google-maps-react';
 
 const ListingLocation = () => {
     return (

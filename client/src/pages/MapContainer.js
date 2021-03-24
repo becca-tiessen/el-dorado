@@ -20,7 +20,7 @@ const MapContainer = ({ google }) => {
 
 
   const getListings = async () => {
-    const response = await fetch(ROUTES.LISTINGS);
+    const response = await fetch("http://localhost:8090/listings");
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body;
@@ -28,11 +28,10 @@ const MapContainer = ({ google }) => {
 
 
   useEffect( () => {
-    getListings()
-      .then(res => setListings(res.listings))
+    // getListings()
+    //   .then(res => setListings(res.listings))
   },[]);
-
-  console.log(selected)
+  
   return (
     <PageWrapper>
       <Map
@@ -70,7 +69,8 @@ const MapContainer = ({ google }) => {
 };
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDyy_4tCE_t4Qf_HYvc_aFBs0Ic38-xfjc'
+  apiKey: 'AIzaSyAbeQpYkV7DY-uZA_fzuF0IlxclvToBMmQ',
+  // apiKey: process.env.REACT_APP_GOOGLE_MAP_API_KEY
 })(MapContainer);
 
 const mapStyles = {

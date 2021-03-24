@@ -18,7 +18,7 @@ const LandingPage = () => {
             <Box pad="large" direction="row" justify="center">
                 <Paragraph color='accent2' size="large">
                     selling something?
-                    <Button color='accent2' label="sign up" onClick={()=>{history.push(ROUTES.ACCOUNT)}}/>
+                    <Button color='accent2' label="manage your listing" onClick={()=>{history.push(ROUTES.ACCOUNT)}}/>
                 </Paragraph>
             </Box>
         </PageWrapper>

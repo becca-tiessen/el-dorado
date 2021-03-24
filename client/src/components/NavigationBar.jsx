@@ -9,7 +9,7 @@ const NavigationBar = () => {
     let history = useHistory();
     return (
         <>
-            <Nav justify="end" direction="row" background="accent4" pad="small">
+            <Nav justify="between" direction="row" background="accent4" pad="small">
                 <Anchor color="accent2" onClick={() => { history.push('/') }} icon={<HomeIcon />} />
                 <Anchor color="accent2" onClick={() => { history.push(ROUTES.ACCOUNT) }} icon={<AccountCircleIcon />} />
             </Nav>

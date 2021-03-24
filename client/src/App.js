@@ -3,8 +3,10 @@ import { Grommet } from 'grommet';
 import { Switch, Route, Redirect } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import MapContainer from './pages/MapContainer';
-import MerchantProfile from './pages/MerchantProfile';
+import LoginPage from './pages/LoginPage';
+import ListingForm from './components/ListingForm';
 import ROUTES from './constants/routes';
+import COLOURS from './constants/colours';
 
 const theme = {
   global: {
@@ -14,11 +16,11 @@ const theme = {
       height: '20px',
     },
     colors: {
-      brand: '#FFBD71',
-      accent1: '#C73866',
-      accent2: '#FE6763',
-      accent3: '#FD8F52',
-      accent4: '#FFDCA2',
+      brand: COLOURS.peach,
+      accent1: COLOURS.plum,
+      accent2: COLOURS.salmon,
+      accent3: COLOURS.orange,
+      accent4: COLOURS.gold,
     },
   },
 };
@@ -29,7 +31,8 @@ function App() {
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path={ROUTES.LISTINGS} component={MapContainer} />
-        <Route path={ROUTES.ACCOUNT} component={MerchantProfile} />
+        <Route path={ROUTES.ACCOUNT} component={LoginPage} />
+        <Route path={ROUTES.CREATE_LISTING} component={ListingForm}/>
         <Redirect to={LandingPage}/>
       </Switch>
     </Grommet>
