@@ -2,10 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 
-	"el-dorado/server/internal"
+	internal "el-dorado/server/internal/app"
 
 	"github.com/shopspring/decimal"
 )
@@ -13,11 +12,10 @@ import (
 func main() {
 	http.HandleFunc("/listings", listingHandler)
 
-	http.ListenAndServe(":8090", nil)
+	http.ListenAndServe(":8080", nil)
 }
 
 func listingHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("listings")
 	stubListings := []internal.Listing{
 		{
 			ID:      1,
@@ -37,12 +35,13 @@ func listingHandler(w http.ResponseWriter, req *http.Request) {
 		},
 	}
 
-	w.Header().Set("Content-Type", "application/json")
 	data, err := json.Marshal(stubListings)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write(data)
+	w.Write([]byte(data))
+	// json.NewEncoder(w).Encode(data)
 }

@@ -4,7 +4,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import LandingPage from './pages/LandingPage';
 import MapContainer from './pages/MapContainer';
 import LoginPage from './pages/LoginPage';
-import ListingForm from './components/ListingForm';
 import ROUTES from './constants/routes';
 import COLOURS from './constants/colours';
 
@@ -32,8 +31,7 @@ function App() {
         <Route path="/" exact component={LandingPage} />
         <Route path={ROUTES.LISTINGS} component={MapContainer} />
         <Route path={ROUTES.ACCOUNT} component={LoginPage} />
-        <Route path={ROUTES.CREATE_LISTING} component={ListingForm}/>
-        <Redirect to={LandingPage}/>
+        <Redirect to={{LandingPage}}/>
       </Switch>
     </Grommet>
   );
