@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS listings (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	title VARCHAR(255) COLLATE utf8_unicode_ci,
+	description TEXT COLLATE utf8_unicode_ci,
+	creator_id INT NOT NULL, # foreign key, maps to user id
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP, 
+	deleted_at TIMESTAMP
+)ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS users (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	first_name VARCHAR(255) COLLATE utf8_unicode_ci NOT NULL,
+	last_name VARCHAR (255) COLLATE utf8_unicode_ci NOT NULL,
+	email VARCHAR (255) COLLATE utf8_unicode_ci NOT NULL UNIQUE,/* 
+	auth_id VARCHAR (255) NOT NULL UNIQUE, */
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP,
+	deleted_at TIMESTAMP
+)ENGINE=INNODB;
