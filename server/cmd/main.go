@@ -10,6 +10,20 @@ import (
 )
 
 func main() {
+	// dbCreds := os.Getenv("DB_CONNECTION")
+
+	// db, err := sql.Open("mysql", dbCreds)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// defer db.Close()
+
+	// db.SetConnMaxLifetime(time.Minute * 3)
+	// db.SetMaxOpenConns(10)
+	// db.SetMaxIdleConns(10)
+
+	// repo := internal.NewRepo(db)
+
 	http.HandleFunc("/listings", listingHandler)
 
 	http.ListenAndServe(":8080", nil)
