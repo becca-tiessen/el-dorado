@@ -1,15 +1,12 @@
 package app
 
-import "github.com/shopspring/decimal"
+import (
+	"github.com/shopspring/decimal"
+)
 
 type Listing struct {
-	ID       int        `json:"id"`
-	Name     string     `json:"name"`
-	Address  string     `json:"address"`
-	Location Coordinate `json:"location"`
-}
-
-type Coordinate struct {
-	Latitude  decimal.Decimal `json:"lat"`
-	Longitude decimal.Decimal `json:"lng"`
+	ID        int64           `json:"id" db:"id"`
+	Name      string          `json:"name" db:"name"`
+	Latitude  decimal.Decimal `json:"lat" db:"latitude"`
+	Longitude decimal.Decimal `json:"lng" db:"longitude"`
 }

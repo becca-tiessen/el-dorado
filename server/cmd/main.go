@@ -1,72 +1,36 @@
 package main
 
 import (
-	"database/sql"
 	"encoding/json"
-	"fmt"
 	"net/http"
-	"os"
-	"time"
 
 	internal "el-dorado/server/internal/app"
+
+	"github.com/jmoiron/sqlx"
 )
 
 func main() {
-	// dbCreds := os.Getenv("DB_CONNECTION")
-
-	// db, err := sql.Open("mysql", dbCreds)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// defer db.Close()
-
-	// db.SetConnMaxLifetime(time.Minute * 3)
-	// db.SetMaxOpenConns(10)
-	// db.SetMaxIdleConns(10)
-
-	// repo := internal.NewRepo(db)
-
 	http.HandleFunc("/listings", listingHandler)
 
 	http.ListenAndServe(":8080", nil)
 }
 
 func listingHandler(w http.ResponseWriter, req *http.Request) {
-	// stubListings := []internal.Listing{
-	// 	{
-	// 		ID:      1,
-	// 		Address: "271 Lanark St",
-	// 		Location: internal.Coordinate{
-	// 			Latitude:  decimal.NewFromFloat(49.8688),
-	// 			Longitude: decimal.NewFromFloat(-97.1976),
-	// 		},
-	// 	},
-	// 	{
-	// 		ID:      2,
-	// 		Address: "879 Warsaw Ave",
-	// 		Location: internal.Coordinate{
-	// 			Latitude:  decimal.NewFromFloat(49.8673),
-	// 			Longitude: decimal.NewFromFloat(-97.1583),
-	// 		},
-	// 	},
-	// }
+	// dbCreds := os.Getenv("DB_CONNECTION")
+	// fmt.Println("db creds", dbCreds)
 
-	dbCreds := os.Getenv("DB_CONNECTION")
-
-	db, err := sql.Open("mysql", dbCreds)
+	db, err := sqlx.Connect("mysql", "root:password@tcp(127.0.0.1:3318)/el-dorado?parseTime=true")
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
 
-	db.SetConnMaxLifetime(time.Minute * 3)
-	db.SetMaxOpenConns(10)
-	db.SetMaxIdleConns(10)
-
 	repo := internal.NewRepo(db)
 
 	listings, err := repo.GetListings()
-	fmt.Println(listings)
+	if err != nil {
+		panic(err)
+	}
 
 	data, err := json.Marshal(listings)
 	if err != nil {

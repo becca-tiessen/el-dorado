@@ -4,16 +4,16 @@ import PageWrapper from '../components/PageWrapper';
 
 const MapContainer = ({ google }) => {
   const [listings, setListings] = useState([]);
-  const [selected, setSelected] = useState({});
+  const [selectedMarker, setSelectedMarker] = useState({});
   const [showInfoWindow, setShowInfoWindow] = useState(false);
 
   const onMarkerClick = (marker) => {
-    setSelected(marker);
+    setSelectedMarker(marker);
     setShowInfoWindow(true);
   };
 
   const onCloseWindow = () => {
-    setSelected({});
+    setSelectedMarker({});
     setShowInfoWindow(false);
   };
 
@@ -51,19 +51,22 @@ const MapContainer = ({ google }) => {
         return (
           <Marker
             key={item.id}
-            title={item.address}
-            position={item.location}
+            title={item.name}
+            position={{lat: item.lat, lng: item.lng}}
             onClick={() => onMarkerClick(item)}
           />
         )}
       )}
       <InfoWindow
-        position={selected.location}
+        position={{
+          lat: parseFloat(selectedMarker.lat), 
+          lng: parseFloat(selectedMarker.lng)
+        }}
         visible={showInfoWindow}
         clickable={true}
         onClose={onCloseWindow}
       >
-        <p>{selected.address}</p>
+        <p>{selectedMarker.name}</p>
       </InfoWindow>
       
     </Map>

@@ -1,11 +1,13 @@
 CREATE TABLE IF NOT EXISTS listings (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-	title VARCHAR(255) COLLATE utf8_unicode_ci,
-	description TEXT COLLATE utf8_unicode_ci,
-	creator_id INT NOT NULL, # foreign key, maps to user id
-	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	updated_at TIMESTAMP, 
-	deleted_at TIMESTAMP
+	`id` INT AUTO_INCREMENT PRIMARY KEY,
+	`name` VARCHAR(255) COLLATE utf8_unicode_ci,
+	`description` TEXT COLLATE utf8_unicode_ci,
+	`latitude` POINT, 
+	`longitude` POINT,
+	`user_id` INT NOT NULL, # foreign key, maps to user id
+	`created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	`deleted_at` DATETIME DEFAULT NULL
 )ENGINE=INNODB;
 
 CREATE TABLE IF NOT EXISTS users (
