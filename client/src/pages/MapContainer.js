@@ -22,13 +22,11 @@ const MapContainer = ({ google }) => {
     await fetch('/listings')
     .then(res => res.json())
     .then(
-      (listings) => {
-        setListings(listings);
-      },
-      (error) => {
-        console.log(error);
+      (result) => {
+        setListings(result.listings);
+      }).catch((err) => {
+        console.log(err)
       })
-    return ;
   };
 
 

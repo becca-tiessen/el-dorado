@@ -1,43 +1,42 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 
-	internal "el-dorado/server/internal/app"
+	"el-dorado/server/internal/app"
 
+	httptransport "github.com/go-kit/kit/transport/http"
 	"github.com/jmoiron/sqlx"
 )
 
 func main() {
-	http.HandleFunc("/listings", listingHandler)
-
-	http.ListenAndServe(":8080", nil)
-}
-
-func listingHandler(w http.ResponseWriter, req *http.Request) {
-	// dbCreds := os.Getenv("DB_CONNECTION")
-	// fmt.Println("db creds", dbCreds)
-
 	db, err := sqlx.Connect("mysql", "root:password@tcp(127.0.0.1:3318)/el-dorado?parseTime=true")
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
 
-	repo := internal.NewRepo(db)
+	repo := app.NewRepo(db)
 
-	listings, err := repo.GetListings()
-	if err != nil {
-		panic(err)
-	}
+	svc := app.NewService(repo)
 
-	data, err := json.Marshal(listings)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-	}
+	listingsHandler := httptransport.NewServer(
+		app.MakeGetListingsEndpoint(svc),
+		decodeGetListingsRequest,
+		encodeResponse,
+	)
 
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(data))
+	http.Handle("/listings", listingsHandler)
+
+	http.ListenAndServe(":8080", nil)
+}
+
+func decodeGetListingsRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	return r, nil
+}
+
+func encodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
+	return json.NewEncoder(w).Encode(response)
 }
