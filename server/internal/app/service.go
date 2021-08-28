@@ -17,3 +17,7 @@ func NewService(repo Repo) Service {
 func (s *service) GetListings() ([]Listing, error) {
 	return s.repo.GetListings()
 }
+
+func (s *service) CreateListing() error {
+	return s.repo.CreateListing()
+}
