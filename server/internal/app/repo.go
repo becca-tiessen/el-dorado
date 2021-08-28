@@ -1,6 +1,9 @@
 package app
 
 import (
+	"errors"
+	"time"
+
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"
 
@@ -9,6 +12,7 @@ import (
 
 type Repo interface {
 	GetListings() ([]Listing, error)
+	CreateListing(Listing) (Listing, error)
 }
 
 type repo struct {
@@ -37,4 +41,34 @@ func (r *repo) GetListings() ([]Listing, error) {
 	}
 
 	return listings, nil
+}
+
+func (r *repo) CreateListing(li Listing) (Listing, error) {
+	now := time.Now().UTC()
+
+	sql, args, err := sq.Insert("listings").
+		SetMap(sq.Eq{
+			"name":       li.Name,
+			"latitude":   li.Latitude.String(),
+			"longitude":  li.Longitude.String(),
+			"created_at": now,
+		}).
+		ToSql()
+	if err != nil {
+		return Listing{}, errors.New("error building create listing query")
+	}
+
+	result, err := r.db.Exec(sql, args...)
+	if err != nil {
+		return Listing{}, errors.New("error creating listing")
+	}
+
+	id, err := result.LastInsertId()
+	if err != nil {
+		return Listing{}, errors.New("error getting listing ID")
+	}
+
+	li.ID = id
+
+	return li, nil
 }

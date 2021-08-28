@@ -38,7 +38,8 @@ const LandingPage = () => {
             color="accent2"
             label="manage your listing"
             onClick={() => {
-              history.push(ROUTES.ACCOUNT);
+              // history.push(ROUTES.ACCOUNT);
+              history.push(ROUTES.MANAGE)
             }}
           />
           <KofiButton />

@@ -2,6 +2,7 @@ package app
 
 type Service interface {
 	GetListings() ([]Listing, error)
+	CreateListing(Listing) (Listing, error)
 }
 
 type service struct {
@@ -18,6 +19,6 @@ func (s *service) GetListings() ([]Listing, error) {
 	return s.repo.GetListings()
 }
 
-func (s *service) CreateListing() error {
-	return s.repo.CreateListing()
+func (s *service) CreateListing(li Listing) (Listing, error) {
+	return s.repo.CreateListing(li)
 }

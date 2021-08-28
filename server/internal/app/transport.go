@@ -24,11 +24,11 @@ func MakeCreateListingEndpoint(svc Service) endpoint.Endpoint {
 			return createListingResponse{}, errors.New("Invalid Request")
 		}
 
-		listing, err := svc.CreateListing(req)
+		li, err := svc.CreateListing(req.Listing)
 		if err != nil {
 			return nil, err
 		}
-		return createListingResponse{}, nil
+		return createListingResponse{Listing: li}, nil
 	}
 }
 
@@ -40,4 +40,6 @@ type createListingRequest struct {
 	Listing Listing `json:"listing"`
 }
 
-type createListingResponse struct{}
+type createListingResponse struct {
+	Listing Listing `json:"listing"`
+}

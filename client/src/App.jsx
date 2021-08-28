@@ -6,6 +6,7 @@ import MapContainer from "./pages/MapContainer";
 import LoginPage from "./pages/LoginPage";
 import ROUTES from "./constants/routes";
 import COLOURS from "./constants/colours";
+import ManageListingsPage from "./pages/ManageListingPage";
 
 const theme = {
   global: {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" exact component={LandingPage} />
         <Route path={ROUTES.LISTINGS} component={MapContainer} />
         <Route path={ROUTES.ACCOUNT} component={LoginPage} />
+        <Route path={ROUTES.MANAGE} component={ManageListingsPage}/>
         <Redirect to={{ LandingPage }} />
       </Switch>
     </Grommet>
