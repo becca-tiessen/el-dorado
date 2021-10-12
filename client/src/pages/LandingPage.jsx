@@ -36,7 +36,7 @@ const LandingPage = () => {
           selling something?
           <Button
             color="accent2"
-            label="manage your listing"
+            label="create a listing"
             onClick={() => {
               // history.push(ROUTES.ACCOUNT);
               history.push(ROUTES.MANAGE)

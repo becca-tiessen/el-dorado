@@ -7,9 +7,15 @@ import LoginPage from "./pages/LoginPage";
 import ROUTES from "./constants/routes";
 import COLOURS from "./constants/colours";
 import ManageListingsPage from "./pages/ManageListingPage";
+import CreateListingPage from "./pages/CreateListingPage";
 
 const theme = {
   global: {
+    focus: {
+      border: {
+        color: COLOURS.plum,
+      }
+    },
     font: {
       family: "Roboto",
       size: "18px",
@@ -33,6 +39,7 @@ function App() {
         <Route path={ROUTES.LISTINGS} component={MapContainer} />
         <Route path={ROUTES.ACCOUNT} component={LoginPage} />
         <Route path={ROUTES.MANAGE} component={ManageListingsPage}/>
+        <Route path={ROUTES.CREATE} component={CreateListingPage}/>
         <Redirect to={{ LandingPage }} />
       </Switch>
     </Grommet>

@@ -1,8 +1,8 @@
 package app
 
 type Service interface {
-	GetListings() ([]Listing, error)
-	CreateListing(Listing) (Listing, error)
+	GetListings() (listings []Listing, err error)
+	CreateListing(listing Listing) (newList Listing, err error)
 }
 
 type service struct {
